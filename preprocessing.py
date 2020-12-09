@@ -2,6 +2,7 @@ from tensorflow import keras
 import argparse
 import os
 import pickle
+import numpy as np
 
 def load_data(path):
     with np.load(path) as f:
