@@ -3,14 +3,16 @@ import argparse
 import os
 import pickle
 
+def load_data(path):
+    with np.load(path) as f:
+        train_images, train_labels = f['x_train'], f['y_train']
+        test_images, test_labels = f['x_test'], f['y_test']
+        return (train_images, train_labels), (test_images, test_labels)
 
 def preprocess(data_dir: str):
     #fashion_mnist = keras.datasets.fashion_mnist
     #(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
-    train_images ="/tmp/data/train-images-idx3-ubyte.gz"
-    test_images = "/tmp/data/t10k-images-idx3-ubyte.gz"
-    train_labels ="/tmp/data/train-labels-idx1-ubyte.gz"
-    test_labels = "/tmp/data/t10k-labels-idx1-ubyte.gz"
+    (train_images, train_labels), (test_images, test_labels) = load_data(path="/data/mnist.npz")
     train_images = train_images / 255.0
     test_images = test_images / 255.0
 
